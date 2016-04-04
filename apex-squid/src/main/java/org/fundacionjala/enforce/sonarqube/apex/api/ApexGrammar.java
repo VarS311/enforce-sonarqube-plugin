@@ -30,22 +30,28 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.ABSTRACT;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.AFTER;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.ANOTATION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.AURA_ENABLED;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.BEFORE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.BOOLEAN;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.BYTE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.CATCH;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.CATEGORY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.CHAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.CLASS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.CONVERTCURRENCY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.DELETE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.DEPRECATED;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.DOUBLE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.ELSE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.EXTENDS;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.FINAL;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.FIRST;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.FLOAT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.FOR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.FUTURE;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.GET;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.IF;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.IMPLEMENTS;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.INSERT;
@@ -54,9 +60,12 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.INTERFACE
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.INVOCABLE_METHOD;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.INVOCABLE_VARIABLE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.IS_TEST;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.ITERATOR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LONG;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.MERGE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NATIVE;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NETWORK;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEW;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NULL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.PRIVATE;
@@ -65,8 +74,12 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.PUBLIC;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.READ_ONLY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.REMOTE_ACTION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.RETURN;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.RETURNING;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SAVEPOINT;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SEARCH;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SHARING;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SHORT;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.STAT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.STATIC;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.STRICTFP;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SUPER;
@@ -74,6 +87,7 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SYNCHRONI
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TEST_SETUP;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TEST_VISIBLE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TOLABEL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TRANSIENT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TRY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.UNDELETE;
@@ -157,6 +171,8 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRu
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.INVOKE_EXPRESSION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ARGUMENTS;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.PROPERTY_DECLARATION;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SOQLN_DATE_LITERAL;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SOQL_DATE_LITERAL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SPECIAL_KEYWORDS_AS_IDENTIFIER;
 
 /**
@@ -226,6 +242,7 @@ public class ApexGrammar {
         modifierKeyWord(grammarBuilder);
         typeDeclaration(grammarBuilder);
         propertyDeclaration(grammarBuilder);
+        allowedKeywordsAsIdentifier(grammarBuilder);
 
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
@@ -936,5 +953,33 @@ public class ApexGrammar {
                 .rule(ALLOWED_KEYWORDS_AS_IDENTIFIER),
                 grammarBuilder.rule(SPECIAL_KEYWORDS_AS_IDENTIFIER)), LBRACE,
                 grammarBuilder.rule(ACCESSOR_DECLARATIONS), RBRACE);
+    }
+    /**
+     * Creates the rule for allow keywords as identifier within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void allowedKeywordsAsIdentifier(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(ALLOWED_KEYWORDS_AS_IDENTIFIER).is(
+                grammarBuilder.firstOf(
+                        IDENTIFIER, 
+                        TRANSIENT,
+                        RETURNING,
+                        SEARCH,
+                        STAT,
+                        CONVERTCURRENCY,
+                        SAVEPOINT,
+                        TOLABEL,
+                        SHARING,
+                        GET,
+                        AFTER,
+                        BEFORE,
+                        FIRST,
+                        LAST,
+                        CATEGORY,
+                        NETWORK,
+                        ITERATOR,
+                grammarBuilder.rule(SOQL_DATE_LITERAL),
+                grammarBuilder.rule(SOQLN_DATE_LITERAL)));
     }
 }
