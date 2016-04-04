@@ -16,3 +16,6 @@ hs_err_pid*
 
 # Sonar Files
 .sonar/*
+
+# Netbeans
+nb-configuration.xml
