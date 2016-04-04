@@ -105,6 +105,8 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.SEMICO
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.STAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexTokenType.NUMERIC;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexTokenType.STRING;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ACCESSOR_DECLARATIONS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ALLOWED_KEYWORDS_AS_IDENTIFIER;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ANNOTATION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.APEX_GRAMMAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ASSIGN_VARIABLE_INITILIZER;
@@ -154,6 +156,8 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRu
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.WHILE_STATEMENT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.INVOKE_EXPRESSION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ARGUMENTS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.PROPERTY_DECLARATION;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SPECIAL_KEYWORDS_AS_IDENTIFIER;
 
 /**
  * This class unites all the rules you need a class.
@@ -221,6 +225,7 @@ public class ApexGrammar {
         fieldDeclaration(grammarBuilder);
         modifierKeyWord(grammarBuilder);
         typeDeclaration(grammarBuilder);
+        propertyDeclaration(grammarBuilder);
 
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
@@ -918,5 +923,18 @@ public class ApexGrammar {
      */
     private static void type(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(TYPE).is(TYPE_SPECIFIER);
+    }
+
+    /**
+     * Creates the rule for Property Declaration within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void propertyDeclaration(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(PROPERTY_DECLARATION).is(
+                grammarBuilder.rule(TYPE), grammarBuilder.firstOf(grammarBuilder
+                .rule(ALLOWED_KEYWORDS_AS_IDENTIFIER),
+                grammarBuilder.rule(SPECIAL_KEYWORDS_AS_IDENTIFIER)), LBRACE,
+                grammarBuilder.rule(ACCESSOR_DECLARATIONS), RBRACE);
     }
 }
