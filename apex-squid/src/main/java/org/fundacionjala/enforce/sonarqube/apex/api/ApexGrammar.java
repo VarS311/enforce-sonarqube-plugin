@@ -294,7 +294,7 @@ public class ApexGrammar {
         accessorDeclarations(grammarBuilder);
         accessorDeclaration(grammarBuilder);
         accessor(grammarBuilder);
-            
+
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
         return grammarBuilder.build();
@@ -1002,11 +1002,11 @@ public class ApexGrammar {
         grammarBuilder.rule(PROPERTY_DECLARATION).is(
                 grammarBuilder.rule(TYPE), grammarBuilder.firstOf(grammarBuilder
                 .rule(ALLOWED_KEYWORDS_AS_IDENTIFIER),
-                grammarBuilder.rule(SPECIAL_KEYWORDS_AS_IDENTIFIER)), LBRACE,
-                grammarBuilder.rule(ACCESSOR_DECLARATIONS), RBRACE);
+                SPECIAL_KEYWORDS_AS_IDENTIFIER), LBRACE,
+                ACCESSOR_DECLARATIONS, RBRACE);
     }
-    
-	/**
+
+    /**
      * Creates the rule for using a specialKeyword as identifier.
      *
      * @param grammarBuilder ApexGrammarBuilder parameter.
@@ -1024,7 +1024,7 @@ public class ApexGrammar {
     private static void allowedKeywordsAsIdentifier(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(ALLOWED_KEYWORDS_AS_IDENTIFIER).is(
                 grammarBuilder.firstOf(
-                        IDENTIFIER, 
+                        IDENTIFIER,
                         TRANSIENT,
                         RETURNING,
                         SEARCH,
@@ -1041,10 +1041,10 @@ public class ApexGrammar {
                         CATEGORY,
                         NETWORK,
                         ITERATOR,
-                grammarBuilder.rule(SOQL_DATE_LITERAL),
-                grammarBuilder.rule(SOQL_NDATE_LITERAL)));
+                        SOQL_DATE_LITERAL,
+                        SOQL_NDATE_LITERAL));
     }
-    
+
     /**
      * Creates the rule for SOQL date literal within a class.
      *
@@ -1053,7 +1053,7 @@ public class ApexGrammar {
     private static void soqlDateLiteral(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(SOQL_DATE_LITERAL).is(
                 grammarBuilder.firstOf(
-                        TODAY, 
+                        TODAY,
                         YESTERDAY,
                         TOMORROW,
                         LAST_WEEK,
@@ -1077,7 +1077,7 @@ public class ApexGrammar {
                         LAST_FISCAL_YEAR,
                         NEXT_FISCAL_YEAR));
     }
-    
+
     /**
      * Creates the rule for SOQL date literal within a class.
      *
@@ -1101,7 +1101,7 @@ public class ApexGrammar {
                         LAST_N_FISCAL_YEARS,
                         NEXT_N_FISCAL_YEARS));
     }
-    
+
     /**
      * Creates the rule for accessor declarations within a class.
      *
@@ -1109,10 +1109,10 @@ public class ApexGrammar {
      */
     private static void accessorDeclarations(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(ACCESSOR_DECLARATIONS).is(
-                grammarBuilder.rule(ACCESSOR_DECLARATION),
-                grammarBuilder.rule(ACCESSOR_DECLARATION));
+                ACCESSOR_DECLARATION,
+                ACCESSOR_DECLARATION);
     }
-    
+
     /**
      * Creates the rule for accessor declaration within a class.
      *
@@ -1120,11 +1120,10 @@ public class ApexGrammar {
      */
     private static void accessorDeclaration(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(ACCESSOR_DECLARATION).is(
-                grammarBuilder.rule(MODIFIER),
-                grammarBuilder.rule(ACCESSOR),
+                MODIFIER, ACCESSOR,
                 grammarBuilder.firstOf(ACCESSOR_BODY, SEMICOLON));
     }
-    
+
     /**
      * Creates the rule for accessor within a class.
      *
