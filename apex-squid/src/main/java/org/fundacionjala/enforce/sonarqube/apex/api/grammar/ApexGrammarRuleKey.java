@@ -54,7 +54,6 @@ public enum ApexGrammarRuleKey implements GrammarRuleKey {
     EXPRESSION,
     EXPRESSION_FINAL,
     EXTENDS_LIST,
-    IDENTIFIER,
     IMPLEMENTS_LIST,
     INIT_IDENTIFIER,
     INC,

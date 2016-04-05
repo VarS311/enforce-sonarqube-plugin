@@ -286,14 +286,15 @@ public class ApexGrammar {
         fieldDeclaration(grammarBuilder);
         modifierKeyWord(grammarBuilder);
         typeDeclaration(grammarBuilder);
-        propertyDeclaration(grammarBuilder);
-        allowedKeywordsAsIdentifier(grammarBuilder);
         specialKeywordsAsIdentifier(grammarBuilder);
         soqlDateLiteral(grammarBuilder);
         soqlNDateLiteral(grammarBuilder);
-        accessorDeclarations(grammarBuilder);
-        accessorDeclaration(grammarBuilder);
+        allowedKeywordsAsIdentifier(grammarBuilder);
+        accessorBody(grammarBuilder);
         accessor(grammarBuilder);
+        accessorDeclaration(grammarBuilder);
+        accessorDeclarations(grammarBuilder);
+        propertyDeclaration(grammarBuilder);
 
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
@@ -1000,8 +1001,8 @@ public class ApexGrammar {
      */
     private static void propertyDeclaration(LexerfulGrammarBuilder grammarBuilder) {
         grammarBuilder.rule(PROPERTY_DECLARATION).is(
-                grammarBuilder.rule(TYPE), grammarBuilder.firstOf(grammarBuilder
-                .rule(ALLOWED_KEYWORDS_AS_IDENTIFIER),
+                TYPE, grammarBuilder.firstOf(
+                ALLOWED_KEYWORDS_AS_IDENTIFIER,
                 SPECIAL_KEYWORDS_AS_IDENTIFIER), LBRACE,
                 ACCESSOR_DECLARATIONS, RBRACE);
     }
@@ -1012,7 +1013,7 @@ public class ApexGrammar {
      * @param grammarBuilder ApexGrammarBuilder parameter.
      */
     private static void specialKeywordsAsIdentifier(LexerfulGrammarBuilder grammarBuilder) {
-        grammarBuilder.rule(PROPERTY_DECLARATION).is(
+        grammarBuilder.rule(SPECIAL_KEYWORDS_AS_IDENTIFIER).is(
                 grammarBuilder.firstOf(WITHOUT, OFFSET, DATA, GROUP, LIMIT));
     }
 
@@ -1130,7 +1131,16 @@ public class ApexGrammar {
      * @param grammarBuilder ApexGrammarBuilder parameter.
      */
     private static void accessor(LexerfulGrammarBuilder grammarBuilder) {
-        grammarBuilder.rule(ACCESSOR_DECLARATION).is(
+        grammarBuilder.rule(ACCESSOR).is(
                 grammarBuilder.firstOf(GET, SET));
+    }
+
+    /**
+     * Creates the rule for accessor body.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void accessorBody(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(ACCESSOR_BODY).is(IDENTIFIER);
     }
 }

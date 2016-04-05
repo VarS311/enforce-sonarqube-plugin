@@ -44,7 +44,7 @@ public class ApexGrammarAccessorBodyTest extends ApexRuleTest {
     public void positiveRules() {
         //TODO:
         assertThat(parser)
-                .matches("{private myVariable first}");
+                .matches("hi");
     }
 
 }
