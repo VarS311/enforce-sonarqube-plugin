@@ -110,8 +110,53 @@ public enum ApexKeyword implements TokenType {
     READ_ONLY("ReadOnly"),
     REMOTE_ACTION("RemoteAction"),
     TEST_SETUP("testSetup"),
-    TEST_VISIBLE("TestVisible");
+    TEST_VISIBLE("TestVisible"),
 
+    /**
+     * SOQL DATE LITERAL
+     */
+    TODAY("today"),
+    YESTERDAY("yesterday"),
+    TOMORROW("tomorrow"),
+    LAST_WEEK("last_week"),
+    THIS_WEEK("this_week"),
+    NEXT_WEEK("next_week"),
+    LAST_MONTH("last_month"),
+    THIS_MONTH("this_month"),
+    NEXT_MONTH("next_month"),
+    LAST_90_DAYS("last_90_days"),
+    NEXT_90_DAYS("next_90_days"),
+    THIS_QUARTER("this_quarter"),
+    LAST_QUARTER("last_quarter"),
+    NEXT_QUARTER("next_quarter"),
+    THIS_YEAR("this_year"),
+    LAST_YEAR("last_year"),
+    NEXT_YEAR("next_year"),
+    THIS_FISCAL_QUARTER("this_fiscal_quarter"),
+    LAST_FISCAL_QUARTER("last_fiscal_quarter"),
+    NEXT_FISCAL_QUARTER("next_fiscal_quarter"),
+    THIS_FISCAL_YEAR("this_fiscal_year"),
+    LAST_FISCAL_YEAR("last_fiscal_year"),
+    NEXT_FISCAL_YEAR("next_fiscal_year"),
+    
+    /**
+     * SOQL NDate Literal
+     */
+    LAST_N_DAYS("last_n_days"),
+    NEXT_N_DAYS("next_n_days"),
+    LAST_N_WEEKS("last_n_weeks"),
+    NEXT_N_WEEKS("next_n_weeks"),
+    LAST_N_MONTHS("last_n_months"),
+    NEXT_N_MONTHS("next_n_months"),
+    LAST_N_QUARTERS("last_n_quarters"),
+    NEXT_N_QUARTERS("next_n_quarters"),
+    LAST_N_YEARS("last_n_years"),
+    NEXT_N_YEARS("next_n_years"),
+    LAST_N_FISCAL_QUARTERS("last_n_fiscal_quarters"),
+    NEXT_N_FISCAL_QUARTERS("next_n_fiscal_quarters"),
+    LAST_N_FISCAL_YEARS("last_n_fiscal_years"),
+    NEXT_N_FISCAL_YEARS("next_n_fiscal_years");
+    
     /**
      * Save the value with enums.
      */

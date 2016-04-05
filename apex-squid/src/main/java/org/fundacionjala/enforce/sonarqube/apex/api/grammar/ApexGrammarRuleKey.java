@@ -68,7 +68,7 @@ public enum ApexGrammarRuleKey implements GrammarRuleKey {
     PROPERTY_DECLARATION,
     RETURN_STATEMENT,
     SOQL_DATE_LITERAL,
-    SOQLN_DATE_LITERAL,
+    SOQL_NDATE_LITERAL,
     STATEMENT,
     STATEMENT_BLOCK,
     STATEMENT_ELSE,

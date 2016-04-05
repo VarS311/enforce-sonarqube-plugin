@@ -64,12 +64,40 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.INVOCABLE
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.IS_TEST;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.ITERATOR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_90_DAYS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_FISCAL_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_FISCAL_YEAR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_MONTH;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_DAYS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_FISCAL_QUARTERS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_FISCAL_YEARS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_MONTHS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_QUARTERS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_WEEKS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_N_YEARS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_WEEK;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LAST_YEAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LIMIT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.LONG;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.MERGE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NATIVE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NETWORK;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEW;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_90_DAYS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_FISCAL_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_FISCAL_YEAR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_MONTH;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_DAYS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_FISCAL_QUARTERS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_FISCAL_YEARS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_MONTHS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_QUARTERS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_WEEKS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_N_YEARS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_WEEK;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NEXT_YEAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.NULL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.OFFSET;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.PRIVATE;
@@ -91,7 +119,15 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SYNCHRONI
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TEST_SETUP;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TEST_VISIBLE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_FISCAL_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_FISCAL_YEAR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_MONTH;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_QUARTER;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_WEEK;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.THIS_YEAR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TODAY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TOLABEL;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TOMORROW;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TRANSIENT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.TRY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.UNDELETE;
@@ -102,6 +138,7 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.VOLATILE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.WHILE;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.WITH;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.WITHOUT;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.YESTERDAY;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.ASSIGN;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.AT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.COLON;
@@ -175,7 +212,7 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRu
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.INVOKE_EXPRESSION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ARGUMENTS;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.PROPERTY_DECLARATION;
-import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SOQLN_DATE_LITERAL;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SOQL_NDATE_LITERAL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SOQL_DATE_LITERAL;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.SPECIAL_KEYWORDS_AS_IDENTIFIER;
 
@@ -248,7 +285,9 @@ public class ApexGrammar {
         propertyDeclaration(grammarBuilder);
         allowedKeywordsAsIdentifier(grammarBuilder);
         specialKeywordsAsIdentifier(grammarBuilder);
-
+        soqlDateLiteral(grammarBuilder);
+        soqlNDateLiteral(grammarBuilder);
+            
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
         return grammarBuilder.build();
@@ -996,6 +1035,63 @@ public class ApexGrammar {
                         NETWORK,
                         ITERATOR,
                 grammarBuilder.rule(SOQL_DATE_LITERAL),
-                grammarBuilder.rule(SOQLN_DATE_LITERAL)));
+                grammarBuilder.rule(SOQL_NDATE_LITERAL)));
+    }
+    
+    /**
+     * Creates the rule for SOQL date literal within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void soqlDateLiteral(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(SOQL_DATE_LITERAL).is(
+                grammarBuilder.firstOf(
+                        TODAY, 
+                        YESTERDAY,
+                        TOMORROW,
+                        LAST_WEEK,
+                        THIS_WEEK,
+                        NEXT_WEEK,
+                        LAST_MONTH,
+                        THIS_MONTH,
+                        NEXT_MONTH,
+                        LAST_90_DAYS,
+                        NEXT_90_DAYS,
+                        THIS_QUARTER,
+                        LAST_QUARTER,
+                        NEXT_QUARTER,
+                        THIS_YEAR,
+                        LAST_YEAR,
+                        NEXT_YEAR,
+                        THIS_FISCAL_QUARTER,
+                        LAST_FISCAL_QUARTER,
+                        NEXT_FISCAL_QUARTER,
+                        THIS_FISCAL_YEAR,
+                        LAST_FISCAL_YEAR,
+                        NEXT_FISCAL_YEAR));
+    }
+    
+    /**
+     * Creates the rule for SOQL date literal within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void soqlNDateLiteral(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(SOQL_NDATE_LITERAL).is(
+                grammarBuilder.firstOf(
+                        LAST_N_DAYS,
+                        NEXT_N_DAYS,
+                        LAST_N_WEEKS,
+                        NEXT_N_WEEKS,
+                        LAST_N_MONTHS,
+                        NEXT_N_MONTHS,
+                        LAST_N_QUARTERS,
+                        NEXT_N_QUARTERS,
+                        LAST_N_YEARS,
+                        NEXT_N_YEARS,
+                        LAST_N_FISCAL_QUARTERS,
+                        NEXT_N_FISCAL_QUARTERS,
+                        LAST_N_FISCAL_YEARS,
+                        NEXT_N_FISCAL_YEARS));
     }
 }
