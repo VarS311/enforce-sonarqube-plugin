@@ -109,6 +109,7 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.RETURN;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.RETURNING;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SAVEPOINT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SEARCH;
+import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SET;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SHARING;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.SHORT;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexKeyword.STAT;
@@ -160,6 +161,9 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.SEMICO
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.STAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexTokenType.NUMERIC;
 import static org.fundacionjala.enforce.sonarqube.apex.api.ApexTokenType.STRING;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ACCESSOR;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ACCESSOR_BODY;
+import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ACCESSOR_DECLARATION;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ACCESSOR_DECLARATIONS;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ALLOWED_KEYWORDS_AS_IDENTIFIER;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.ANNOTATION;
@@ -287,6 +291,9 @@ public class ApexGrammar {
         specialKeywordsAsIdentifier(grammarBuilder);
         soqlDateLiteral(grammarBuilder);
         soqlNDateLiteral(grammarBuilder);
+        accessorDeclarations(grammarBuilder);
+        accessorDeclaration(grammarBuilder);
+        accessor(grammarBuilder);
             
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
         grammarBuilder.setRootRule(APEX_GRAMMAR);
@@ -1093,5 +1100,38 @@ public class ApexGrammar {
                         NEXT_N_FISCAL_QUARTERS,
                         LAST_N_FISCAL_YEARS,
                         NEXT_N_FISCAL_YEARS));
+    }
+    
+    /**
+     * Creates the rule for accessor declarations within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void accessorDeclarations(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(ACCESSOR_DECLARATIONS).is(
+                grammarBuilder.rule(ACCESSOR_DECLARATION),
+                grammarBuilder.rule(ACCESSOR_DECLARATION));
+    }
+    
+    /**
+     * Creates the rule for accessor declaration within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void accessorDeclaration(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(ACCESSOR_DECLARATION).is(
+                grammarBuilder.rule(MODIFIER),
+                grammarBuilder.rule(ACCESSOR),
+                grammarBuilder.firstOf(ACCESSOR_BODY, SEMICOLON));
+    }
+    
+    /**
+     * Creates the rule for accessor within a class.
+     *
+     * @param grammarBuilder ApexGrammarBuilder parameter.
+     */
+    private static void accessor(LexerfulGrammarBuilder grammarBuilder) {
+        grammarBuilder.rule(ACCESSOR_DECLARATION).is(
+                grammarBuilder.firstOf(GET, SET));
     }
 }

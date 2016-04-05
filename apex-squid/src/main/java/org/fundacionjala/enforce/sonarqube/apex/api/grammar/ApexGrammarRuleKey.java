@@ -30,6 +30,9 @@ import org.sonar.sslr.grammar.GrammarRuleKey;
  */
 public enum ApexGrammarRuleKey implements GrammarRuleKey {
 
+    ACCESSOR,
+    ACCESSOR_BODY,
+    ACCESSOR_DECLARATION,
     ACCESSOR_DECLARATIONS,
     ALLOWED_KEYWORDS_AS_IDENTIFIER,
     ANNOTATION,

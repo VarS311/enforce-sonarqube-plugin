@@ -78,6 +78,7 @@ public enum ApexKeyword implements TokenType {
     RETURNING("returning"),
     SAVEPOINT("savepoint"),
     SEARCH("search"),
+    SET("set"),
     SHARING("sharing"),
     SHORT("short"),
     SUPER("super"),
