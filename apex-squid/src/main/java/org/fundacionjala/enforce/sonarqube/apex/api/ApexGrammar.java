@@ -14,6 +14,8 @@ import com.sonar.sslr.api.Grammar;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.APEX_GRAMMAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.TYPE_DECLARATION;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
+import org.fundacionjala.oblivion.apex.ast.tree.ApexTreeFactory;
+import org.fundacionjala.oblivion.apex.grammar.ast.TreeFactory;
 
 /**
  * This class unites all the rules you need a class.
@@ -34,6 +36,8 @@ public class ApexGrammar {
      */
     public static Grammar create() {
         LexerfulGrammarBuilder grammarBuilder = LexerfulGrammarBuilder.create();
+        
+        TreeFactory factory = new ApexTreeFactory();
 
         MostUsed.create(grammarBuilder);
 
@@ -48,6 +52,7 @@ public class ApexGrammar {
         SOQLExpressions.create(grammarBuilder);
 
         grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
+//        factory.createCompilationUnit(TYPE_DECLARATION());
 
         grammarBuilder.setRootRule(APEX_GRAMMAR);
         return grammarBuilder.build();

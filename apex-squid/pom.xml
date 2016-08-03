@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) Fundacion Jala. All rights reserved.
-  ~ Licensed under the MIT license. See LICENSE file in the project root for full license information.
-  -->
+~ Copyright (c) Fundacion Jala. All rights reserved.
+~ Licensed under the MIT license. See LICENSE file in the project root for full license information.
+-->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -31,5 +31,20 @@
             <version>1.20</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.fundacionjala.oblivion.treeimpl</groupId>
+            <artifactId>TreeImplementation</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>/home/vicente_rodriguez/NetBeansProjects/oblivion-netbeans-plugin/TreeImplementation/dist/TreeImplementation.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.fundacionjala.oblivion.tree</groupId>
+            <artifactId>Tree</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>/home/vicente_rodriguez/NetBeansProjects/oblivion-netbeans-plugin/Grammar/dist/Grammar.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
+

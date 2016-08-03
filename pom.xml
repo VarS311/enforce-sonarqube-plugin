@@ -40,6 +40,16 @@
             <name>Fernando Hurtado</name>
             <email>fernando.hurtado@jalasoft.com</email>
         </developer>
+        <developer>
+            <id>vicenterodriguez</id>
+            <name>Vicente Rodriguez</name>
+            <email>Vicente.Rodriguez@jalasoft.com</email>
+        </developer>
+        <developer>
+            <id>kevintitichoca</id>
+            <name>Kevin Titichoca</name>
+            <email>kevin.titichoca@jalasoft.com</email>
+        </developer>
     </developers>
 
     <modules>
