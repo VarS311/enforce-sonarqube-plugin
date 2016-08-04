@@ -11,15 +11,17 @@ import static org.fundacionjala.enforce.sonarqube.apex.api.ApexPunctuator.*;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.*;
 
 import static com.sonar.sslr.api.GenericTokenType.EOF;
+import com.sun.source.tree.Tree;
+import org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey;
+import org.fundacionjala.oblivion.apex.grammar.ast.TreeFactory;
 
 /**
  * This class contains constructors for Declaration rules and its sub rules.
  *
  */
 public class Declaration {
-
+    
     public static void create(LexerfulGrammarBuilder grammarBuilder) {
-        typeDeclaration(grammarBuilder);
         typeClass(grammarBuilder);
         extendsList(grammarBuilder);
         implementsList(grammarBuilder);
@@ -50,14 +52,34 @@ public class Declaration {
         classOrInterfaceBody(grammarBuilder);
     }
 
-    private static void typeDeclaration(LexerfulGrammarBuilder grammarBuilder) {
+    private static void typeDeclaration(LexerfulGrammarBuilder grammarBuilder, TreeFactory factory) {
         grammarBuilder.rule(TYPE_DECLARATION).is(
                 MODIFIERS,
                 grammarBuilder.firstOf(
-                        CLASS_OR_INTERFACE_DECLARATION,
-                        ENUM_DECLARATION)
+                        CLASS_OR_INTERFACE_DECLARATION(grammarBuilder, factory),
+                        ENUM_DECLARATION(grammarBuilder, factory))
         );
-
+        
+    }
+    
+    public static ApexGrammarRuleKey TYPE_DECLARATION(LexerfulGrammarBuilder grammarBuilder, TreeFactory factory) {
+        grammarBuilder.rule(TYPE_DECLARATION).is(
+                MODIFIERS,
+                grammarBuilder.firstOf(
+                        CLASS_OR_INTERFACE_DECLARATION(grammarBuilder, factory),
+                        ENUM_DECLARATION(grammarBuilder, factory))
+        );
+        return TYPE_DECLARATION;
+    }
+    
+    public static ApexGrammarRuleKey CLASS_OR_INTERFACE_DECLARATION(LexerfulGrammarBuilder grammarBuilder, TreeFactory factory) {
+        factory.createEmptyClass();
+        return CLASS_OR_INTERFACE_DECLARATION;
+    }
+    
+    public static ApexGrammarRuleKey ENUM_DECLARATION(LexerfulGrammarBuilder grammarBuilder, TreeFactory factory) {
+        factory.createEmptyClass();
+        return ENUM_DECLARATION;
     }
 
     /**

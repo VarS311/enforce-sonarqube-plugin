@@ -7,6 +7,8 @@ package org.fundacionjala.enforce.sonarqube.apex.parser;
 
 import com.google.common.base.Charsets;
 import com.sonar.sslr.impl.Parser;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.Tree;
 import org.fundacionjala.enforce.sonarqube.apex.ApexConfiguration;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.stream.Stream;
+import org.junit.Assert;
 
 public class ApexParserTest {
 
@@ -54,6 +57,12 @@ public class ApexParserTest {
     public void testThrowingAnExceptionWhenParsesAnIlegibleClass() {
         new ParserAssert(parser)
                 .matches(articleControllerTestSource);
+    }
+    
+    @Test
+    public void testGetTree() {
+        Tree decoratedTree = ApexParser.getTree();
+//        Assert.assertTrue(decoratedTree instanceof CompilationUnitTree);
     }
 
     private String readSource(String path) throws IOException {

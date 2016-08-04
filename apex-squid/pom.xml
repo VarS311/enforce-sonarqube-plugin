@@ -45,6 +45,13 @@
             <scope>system</scope>
             <systemPath>/home/vicente_rodriguez/NetBeansProjects/oblivion-netbeans-plugin/Grammar/dist/Grammar.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.fundacionjala.oblivion.nbjavatree</groupId>
+            <artifactId>NbJavaTree</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>/usr/local/netbeans-8.1/java/modules/ext/nb-javac-api.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
 

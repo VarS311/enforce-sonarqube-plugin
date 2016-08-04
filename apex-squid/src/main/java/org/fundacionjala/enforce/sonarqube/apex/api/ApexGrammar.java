@@ -14,6 +14,7 @@ import com.sonar.sslr.api.Grammar;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.APEX_GRAMMAR;
 import static org.fundacionjala.enforce.sonarqube.apex.api.grammar.ApexGrammarRuleKey.TYPE_DECLARATION;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
+import com.sun.source.tree.Tree;
 import org.fundacionjala.oblivion.apex.ast.tree.ApexTreeFactory;
 import org.fundacionjala.oblivion.apex.grammar.ast.TreeFactory;
 
@@ -27,6 +28,9 @@ public class ApexGrammar {
      */
     private ApexGrammar() {
     }
+    
+    private static Tree tree;
+    
 
     /**
      * It is the main method of grammar. Here all other grammars are
@@ -51,11 +55,18 @@ public class ApexGrammar {
         
         SOQLExpressions.create(grammarBuilder);
 
-        grammarBuilder.rule(APEX_GRAMMAR).is(TYPE_DECLARATION, EOF);
-//        factory.createCompilationUnit(TYPE_DECLARATION());
-
+        Tree cuTree = factory.createCompilationUnit(tree);
+        
+        grammarBuilder.rule(APEX_GRAMMAR).is(Declaration.TYPE_DECLARATION(grammarBuilder, factory), EOF);
+        
+        
         grammarBuilder.setRootRule(APEX_GRAMMAR);
+        
+        
         return grammarBuilder.build();
     }
-
+    
+    public static Tree getTree() {
+        return tree;
+    }
 }

@@ -69,6 +69,7 @@ public class ApexAstScanner {
         final SourceProject sourceProject = new SourceProject(PROJECT_NAME);
         final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<>(sourceProject);
         final Parser<Grammar> parser = ApexParser.create(config);
+        ApexParser.getTree();
 
         AstScanner.Builder<Grammar> builder = AstScanner.<Grammar>builder(context).setBaseParser(parser);
         builder.withMetrics(ApexMetric.values());

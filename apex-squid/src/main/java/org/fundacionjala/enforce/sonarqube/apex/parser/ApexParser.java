@@ -11,6 +11,7 @@ import org.fundacionjala.enforce.sonarqube.apex.lexer.ApexLexer;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import com.sun.source.tree.Tree;
 
 /**
  * Builds a {@link Parser} instance for Apex. Required an configuration.
@@ -21,6 +22,8 @@ public class ApexParser {
      * Stores an error message when configuration is null.
      */
     private static final String ERROR_MESSAGE = SquidBundle.getStringFromBundle("parser.messages.error");
+    
+    private static Tree decoratedTree;
 
     /**
      * Default constructor.
@@ -39,7 +42,14 @@ public class ApexParser {
         if (config == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
-        return Parser.builder(ApexGrammar.create())
+        Parser parser = Parser.builder(ApexGrammar.create())
                 .withLexer(ApexLexer.create(config)).build();
+        decoratedTree = ApexGrammar.getTree();
+        return parser;
+    }
+    
+    public static Tree getTree() {
+        //TO DO: throw exception if tree is null for some reason.
+        return decoratedTree;
     }
 }
